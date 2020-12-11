@@ -4,14 +4,12 @@
 - string "password_digest"
 - text "image"
 
-
 ###taskモデル
 - bigint "user_id"
 - string "task_name"
 - text "detail"
-- integer "deadline"
+- string "deadline"
 - string "status"
-- string "label"
 - string "priority"
 
 ###labelモデル
