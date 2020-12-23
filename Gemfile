@@ -16,7 +16,11 @@ group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'rspec-rails', '~> 3.8'
+  gem 'spring-commands-rspec'
   gem 'factory_bot_rails'
+  gem 'spring'
+  gem 'faker'
+  gem 'launchy'
 end
 group :development do
   gem 'web-console', '>= 3.3.0'
