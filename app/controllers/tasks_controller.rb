@@ -26,7 +26,7 @@ class TasksController < ApplicationController
     if @task.update(task_params)
       redirect_to tasks_path, notice:"タスクを編集しました"
     else
-      render :edit
+      render :new
     end
   end
   def destroy
