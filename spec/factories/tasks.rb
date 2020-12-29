@@ -10,7 +10,7 @@ FactoryBot.define do
     task_name {'高雄'}
     detail {'ジャカルタ'}
     deadline {'バンコク'}
-    status {'福岡'}
+    status {'ヤンゴン'}
     priority {'ソウル'}
   end
 end
