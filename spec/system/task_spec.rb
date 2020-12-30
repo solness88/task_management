@@ -10,7 +10,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       fill_in 'task_deadline', with: '台北'
       fill_in 'task_status', with: 'バンコク'
       fill_in 'task_priority', with: 'バーミンガム'
-      click_on 'Create Task'
+      click_on '登録する'
       end
     context 'タスクを新規作成した場合' do
       it '作成したタスクが表示される' do
@@ -23,6 +23,12 @@ RSpec.describe 'タスク管理機能', type: :system do
       it '作成済みのタスク一覧が表示される' do
         visit tasks_path
         expect(page).to have_content "bbbbbb"
+      end
+    end
+    # テスト内容を追加で記載する
+    context 'タスクが作成日時の降順に並んでいる場合' do
+      it '新しいタスクが一番上に表示される' do
+        # ここに実装する
       end
     end
   end

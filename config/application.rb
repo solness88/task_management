@@ -3,6 +3,7 @@ require 'rails/all'
 Bundler.require(*Rails.groups)
 module TaskManagement
   class Application < Rails::Application
+    config.time_zone = 'Tokyo'
     config.load_defaults 5.2
     config.generators do |g|
       g.test_framework :rspec,
