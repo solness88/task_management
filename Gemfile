@@ -21,6 +21,7 @@ group :development, :test do
   gem 'spring'
   gem 'faker'
   gem 'launchy'
+  gem 'database_cleaner'
 end
 group :development do
   gem 'web-console', '>= 3.3.0'

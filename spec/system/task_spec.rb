@@ -2,19 +2,21 @@ require 'rails_helper'
 RSpec.describe 'タスク管理機能', type: :system do
   let(:task_a) { FactoryBot.create(:task) }
   let(:task_b) { FactoryBot.create(:second_task) }
+  before do
+    FactoryBot.create(:task)
+    FactoryBot.create(:second_task)
+  end
   describe '新規作成機能' do
-    before do
-      visit new_task_path
-      fill_in 'task_task_name', with: '東京'
-      fill_in 'task_detail', with: 'ニューヨーク'
-      fill_in 'task_deadline', with: '台北'
-      fill_in 'task_status', with: 'バンコク'
-      fill_in 'task_priority', with: 'バーミンガム'
-      click_on '登録する'
-      end
     context 'タスクを新規作成した場合' do
       it '作成したタスクが表示される' do
-        expect(page).to have_content "ニューヨーク"
+        visit new_task_path
+        fill_in 'task_task_name', with: '東京'
+        fill_in 'task_detail', with: 'ニューヨーク'
+        fill_in 'task_deadline', with: '台北'
+        fill_in 'task_status', with: 'バンコク'
+        fill_in 'task_priority', with: 'バーミンガム'
+        click_on '登録する'
+        expect(page).to have_content "台北"
       end
     end
   end
@@ -22,13 +24,15 @@ RSpec.describe 'タスク管理機能', type: :system do
     context '一覧画面に遷移した場合' do
       it '作成済みのタスク一覧が表示される' do
         visit tasks_path
-        expect(page).to have_content "bbbbbb"
+        expect(page).to have_content "モスクワ"
       end
     end
     # テスト内容を追加で記載する
     context 'タスクが作成日時の降順に並んでいる場合' do
       it '新しいタスクが一番上に表示される' do
-        # ここに実装する
+        visit tasks_path
+        task_list = all('.task_row')
+        expect(task_list[1]).to include "高雄"
       end
     end
   end
