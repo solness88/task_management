@@ -23,9 +23,9 @@
 |string|label_name|
 
 ## Herokuへのデプロイ手順
-* rails assets:precompile RAILS_ENV=productionでアセットプリコンパイル
-* git add -A, その後 git commit -m "" でコミット
-* heroku create で新しいアプリケーションを作成
-* heroku buildpacks:set heroku/ruby, heroku buildpacks:add --index 1 heroku/nodejs でHeroku buildpack を追加
-* heroku run rails db:migrate でマイグレーションを実施
-* git push heroku master でHerokuにデプロイ
+* rails assets:precompile RAILS_ENV=productionでアセットプリコンパイル(一度だけ実施)
+* git add -A, その後 git commit -m "" でコミット（その都度実施)
+* heroku create で新しいアプリケーションを作成(一度だけ実施)
+* heroku buildpacks:set heroku/ruby, heroku buildpacks:add --index 1 heroku/nodejs でHeroku buildpack を追加(一度だけ実施)
+* heroku run rails db:migrate でマイグレーションを実施（その都度実施)
+* git push heroku master でHerokuにデプロイ（その都度実施)
