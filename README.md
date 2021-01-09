@@ -22,7 +22,7 @@
 |---|---|
 |string|label_name|
 
-##Herokuへのデプロイ手順
+## Herokuへのデプロイ手順
 * rails assets:precompile RAILS_ENV=productionでアセットプリコンパイル
 * git add -A, その後 git commit -m "" でコミット
 * heroku create で新しいアプリケーションを作成
