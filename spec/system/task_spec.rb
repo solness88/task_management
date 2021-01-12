@@ -8,7 +8,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         visit new_task_path
         fill_in 'task_task_name', with: '東京'
         fill_in 'task_detail', with: 'ニューヨーク'
-        fill_in 'task_deadline', with: '台北'
+        fill_in 'task_deadline', with:'002020-01-01'
         fill_in 'task_status', with: 'バンコク'
         fill_in 'task_priority', with: 'バーミンガム'
         click_on '登録する'
