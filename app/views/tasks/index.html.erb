@@ -1,11 +1,11 @@
 <%= notice %>
 <table>
   <tr>
-    <th>タスク名</th>
-    <th>タスク詳細</th>
-    <th>期限</th>
-    <th>現在の状態</th>
-    <th>優先順位!</th>
+    <th><%= t('attributes.task.task_name') %></th>
+    <th><%= t('attributes.task.detail') %></th>
+    <th><%= t('attributes.task.deadline') %></th>
+    <th><%= t('attributes.task.status') %></th>
+    <th><%= t('attributes.task.priority') %></th>
   </tr>
 <% @tasks.each do |task| %>
   <tr class = "task_row">
@@ -14,11 +14,11 @@
     <td><%= task.deadline %></td>
     <td><%= task.status %></td>
     <td><%= task.priority %></td>
-    <td><%= link_to "詳細を確認する", task_path(task.id) %></td>
-    <td><%= link_to "タスクを編集する", edit_task_path(task.id) %></td>
-    <td><%= link_to 'ブログを削除する', task_path(task.id), method: :delete ,data: { confirm: '本当に削除していいですか？' } %></td>
+    <td><%= link_to t('attributes.task.detail_page'), task_path(task.id) %></td>
+    <td><%= link_to t('attributes.task.edit_page'), edit_task_path(task.id) %></td>
+    <td><%= link_to t('attributes.task.delete'), task_path(task.id), method: :delete ,data: { confirm: '本当に削除していいですか？' } %></td>
   </tr>
 <% end %>
 </table>
 </br>
-<%= link_to "新しくタスクを作成する", new_task_path %>
+<%= link_to t('attributes.task.create_task'), new_task_path %>

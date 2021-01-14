@@ -1,6 +1,6 @@
-<h1>タスク詳細</h1>
-<p>タスク名:<%= @task.task_name %></p>
-<p>詳細:<%= @task.detail %></p>
-<p>期限:<%= @task.deadline %></p>
-<p>状況:<%= @task.status %></p>
-<p>優先順位:<%= @task.priority %></p>
+<h1><%= t('attributes.task.Task Detail')%></h1>
+<p><%= t('attributes.task.task_name')%><%= @task.task_name %></p>
+<p><%= t('attributes.task.detail')%><%= @task.detail %></p>
+<p><%= t('attributes.task.deadline')%><%= @task.deadline %></p>
+<p><%= t('attributes.task.status')%><%= @task.status %></p>
+<p><%= t('attributes.task.priority')%><%= @task.priority %></p>
