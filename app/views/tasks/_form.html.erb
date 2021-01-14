@@ -1,7 +1,7 @@
 <%= form_with(model: @task, local: true, url: choose_new_or_edit) do |form| %>
 <% if @task.errors.any? %>
   <div id="error_explanation">
-    <h2><%= @task.errors.count %>件のエラーがあります。</h2>
+    <h2><%= @task.errors.count %><%= t('errors.messages.error_number') %></h2>
     <ul>
     <% @task.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
@@ -10,25 +10,25 @@
   </div>
 <% end %>
   <div class="task_new">
-    <%= form 'attributes.task.task_name' %>
+    <%= t('attributes.task.task_name') %>
     <%= form.text_field :task_name %>
   </div>
   <div class="task_new">
-    <%= form.label :詳細 %>
+    <%= t('attributes.task.detail') %>
     <%= form.text_field :detail %>
   </div>
   <div class="task_new">
-    <%= form.label :期限 %>
+    <%= t('attributes.task.deadline') %>
     <%= form.date_field :deadline %>
   </div>
   <div class="task_new">
-    <%= form.label :状況 %>
+    <%= t('attributes.task.status') %>
     <%= form.text_field :status %>
   </div>
   <div class="task_new">
-    <%= form.label :優先順位 %>
+    <%= t('attributes.task.priority') %>
     <%= form.text_field :priority %>
   </div>
 <%= form.submit %>
 <% end %>
-<%= link_to "タスク一覧画面にもどる", tasks_path %>
+<%= link_to t('attributes.task.backto_index'), tasks_path %>

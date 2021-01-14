@@ -15,11 +15,20 @@ ja:
       activated: アクティブフラグ
       admin: 管理者フラグ
     task:
-      task_name: タスク名
-      detail: 詳細
-      deadline: 期限
-      status: 状況
-      priority: 優先順位
+      task_name: タスク名　
+      detail: 詳細　
+      deadline: 期限　
+      status: 状況　
+      priority: 優先順位　
+      detail_page: タスクの詳細を見る
+      edit_page: タスクを編集する
+      delete: タスクを削除する
+      Task Detail: タスクの詳細
+      create_task: 新しくタスクを作成する
+      backto_index: タスク一覧画面に戻る
+      submit: 登録する
+      back: 戻る
+      Please Confirm: 以下の内容で、送信する
   date:
     abbr_day_names:
     - 日

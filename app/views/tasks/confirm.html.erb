@@ -1,15 +1,15 @@
-<h3>以下の内容で、送信する。</h3>
+<h3><%= t('attributes.task.Please Confirm') %></h3>
 <%= form_with(model: @task, local: true) do |form| %>
   <%= form.hidden_field :task_name %>
   <%= form.hidden_field :detail %>
   <%= form.hidden_field :deadline %>
   <%= form.hidden_field :status %>
   <%= form.hidden_field :priority %>
-  <p>タイトル:<%= @task.task_name %></p>
-  <p>本文:<%= @task.detail %></p>
-  <p>期限:<%= @task.deadline %></p>
-  <p>状況:<%= @task.status %></p>
-  <p>優先度:<%= @task.priority %></p>
-  <%= form.submit  "登録する" %>
-  <%= form.submit  "戻る", name: "back" %>
+  <p><%= t('attributes.task.task_name') %><%= @task.task_name %></p>
+  <p><%= t('attributes.task.detail') %><%= @task.detail %></p>
+  <p><%= t('attributes.task.deadline') %><%= @task.deadline %></p>
+  <p><%= t('attributes.task.status') %><%= @task.status %></p>
+  <p><%= t('attributes.task.priority') %><%= @task.priority %></p>
+  <%= form.submit t('attributes.task.submit') %>
+  <%= form.submit t('attributes.task.back'), name: "back" %>
 <% end %>
