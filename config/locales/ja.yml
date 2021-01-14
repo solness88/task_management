@@ -15,6 +15,11 @@ ja:
       activated: アクティブフラグ
       admin: 管理者フラグ
     task:
+      Task name: タスク名
+      Detail: 詳細
+      Deadline: 期限
+      Status: 状況
+      Priority: 優先順位
       task_name: タスク名　
       detail: 詳細　
       deadline: 期限　
