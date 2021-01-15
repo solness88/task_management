@@ -34,6 +34,7 @@ ja:
       submit: 登録する
       back: 戻る
       Please Confirm: 以下の内容で、送信する
+      Sort by Deadline: 終了期限でソートする
   date:
     abbr_day_names:
     - 日
