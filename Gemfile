@@ -23,6 +23,7 @@ group :development, :test do
   gem 'faker'
   gem 'launchy'
   gem 'database_cleaner'
+  gem 'dotenv-rails'
 end
 group :development do
   gem 'web-console', '>= 3.3.0'
