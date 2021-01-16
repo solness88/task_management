@@ -21,5 +21,6 @@
 <% end %>
 </table>
 </br>
-<%= link_to t('attributes.task.Sort by Deadline'), tasks_path(sort_deadline: "true") %>
+<%= link_to t('attributes.task.Sort by Deadline'), tasks_path(deadline: "true") %>
+<%= link_to t('attributes.task.Sort by Create_time'), tasks_path(created_at: "true") %>
 <%= link_to t('attributes.task.create_task'), new_task_path %>
