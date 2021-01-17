@@ -26,7 +26,7 @@ RSpec.describe 'タスク管理機能', type: :system do
     end
   end
   describe '一覧表示機能' do
-    before do
+    before(:each) do
       FactoryBot.create(:task)
       FactoryBot.create(:second_task)
       FactoryBot.create(:third_task)
@@ -49,8 +49,8 @@ RSpec.describe 'タスク管理機能', type: :system do
     end
     context 'タスクが終了期限の降順に並んでいる場合' do
       it '終了期限の最も近いタスクが一番上に表示される' do
-        task_list = all('.task_row')
         click_on '終了期限でソートする'
+        task_list = all('.task_row')
         expect(task_list[0]).to have_content "期限が最も遅いタスク"
         expect(task_list[1]).to have_content "期限が２番目に早いタスク"
         expect(task_list[2]).to have_content "期限が最も早いタスク"
