@@ -8,6 +8,8 @@ class TasksController < ApplicationController
     else
       @tasks = Task.all.order(created_at: :desc)
     end
+    @tasks = Task.where('task_name LIKE ?', "%#{params[:task_name]}%") if params[:task_name].present?
+    @tasks = Task.where(status: params[:status])
   end
 
   def new
