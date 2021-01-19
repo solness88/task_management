@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+
   def index
     @tasks = Task.all.order(created_at: :desc)
     if params[:deadline]
@@ -7,6 +8,7 @@ class TasksController < ApplicationController
     elsif params[:created_at]
       @tasks = Task.all.order(created_at: :desc)
     end
+
     if params[:task].present? && params[:status].present?
       @tasks = Task.where('task_name LIKE ?', "%#{params[:task_name]}%", status: params[:status])
     elsif params[:task_name].present?
