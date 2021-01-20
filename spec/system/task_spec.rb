@@ -10,6 +10,9 @@ RSpec.describe 'タスク管理機能', type: :system do
   let(:task_a) { FactoryBot.create(:task) }
   let(:task_b) { FactoryBot.create(:second_task) }
   let(:task_c) { FactoryBot.create(:third_task) }
+  let(:task_d) { FactoryBot.create(:fourth_task) }
+  let(:task_e) { FactoryBot.create(:fifth_task) }
+  let(:task_f) { FactoryBot.create(:sixth_task) }
   describe '新規作成機能' do
     context 'タスクを新規作成した場合' do
       it '作成したタスクが表示される' do
@@ -27,9 +30,9 @@ RSpec.describe 'タスク管理機能', type: :system do
   end
   describe '一覧表示機能' do
     before(:each) do
-      FactoryBot.create(:task)
-      FactoryBot.create(:second_task)
-      FactoryBot.create(:third_task)
+      task_a
+      task_b
+      task_c
       visit tasks_path
     end
     context '一覧画面に遷移した場合' do
@@ -62,6 +65,19 @@ RSpec.describe 'タスク管理機能', type: :system do
       it '該当タスクの内容が表示される' do
         visit task_path(task_c)
         expect(page).to have_content "ソウル"
+      end
+    end
+  end
+  describe '検索機能' do
+    before do
+      task_a
+      task_b
+      task_c
+    end
+    context 'タイトルであいまい検索をした場合' do
+      it '検索キーワードを含むタスクで絞り込まれる' do
+        visit_tasks_path
+        expect(page).to have_content 'task'
       end
     end
   end

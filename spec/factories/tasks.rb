@@ -20,4 +20,25 @@ FactoryBot.define do
     status {'未着手'}
     priority {'ソウル'}
   end
+  factory :fourth_task, class: Task do
+    task_name {'タスク1'}
+    detail {'タスク1の詳細'}
+    deadline {'002017-01-01'}
+    status {'完了'}
+    priority {'優先'}
+  end
+  factory :fifth_task, class: Task do
+    task_name {'タスク2'}
+    detail {'タスク2の詳細'}
+    deadline {'002016-01-01'}
+    status {'着手中'}
+    priority {'最優先'}
+  end
+  factory :sixth_task, class: Task do
+    task_name {'タスク3'}
+    detail {'タスク3の詳細'}
+    deadline {'002015-01-01'}
+    status {'未着手'}
+    priority {'普通'}
+  end
 end
