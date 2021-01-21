@@ -31,7 +31,7 @@ FactoryBot.define do
     task_name {'タスク2'}
     detail {'タスク2の詳細'}
     deadline {'002016-01-01'}
-    status {'着手中'}
+    status {'未着手'}
     priority {'最優先'}
   end
   factory :sixth_task, class: Task do
