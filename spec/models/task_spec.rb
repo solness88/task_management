@@ -1,12 +1,12 @@
 require 'rails_helper'
 describe 'タスクモデル機能', type: :model do
+  let(:task_a) { FactoryBot.create(:task) }
+  let(:task_b) { FactoryBot.create(:second_task) }
+  let(:task_c) { FactoryBot.create(:third_task) }
+  let(:task_d) { FactoryBot.create(:fourth_task) }
+  let(:task_e) { FactoryBot.create(:fifth_task) }
+  let(:task_f) { FactoryBot.create(:sixth_task) }
   describe 'バリデーションのテスト' do
-    let(:task_a) { FactoryBot.create(:task) }
-    let(:task_b) { FactoryBot.create(:second_task) }
-    let(:task_c) { FactoryBot.create(:third_task) }
-    let(:task_d) { FactoryBot.create(:fourth_task) }
-    let(:task_e) { FactoryBot.create(:fifth_task) }
-    let(:task_f) { FactoryBot.create(:sixth_task) }
     context 'タスクのタイトルが空の場合' do
       it 'バリデーションにひっかる' do
         task = Task.new(task_name:"", detail:"bbb",deadline:"2020-01-01",status:"ddd",priority:"eee")
@@ -27,13 +27,32 @@ describe 'タスクモデル機能', type: :model do
     end
   end
   describe '検索機能' do
-    let!(:task) { FactoryBot.create(:task, task_name: 'task') }
-    let!(:second_task) { FactoryBot.create(:second_task, task_name: "sample") }
+    before do
+      task_a
+      task_b
+      task_c
+      task_d
+      task_e
+      task_f
+    end
     context 'scopeメソッドでタイトルのあいまい検索をした場合' do
       it "検索キーワードを含むタスクが絞り込まれる" do
-        expect(Task.title_search('task')).to include(task)
-        expect(Task.title_search('task')).not_to include(second_task)
-        expect(Task.title_search('task')).to eq 1
+        expect(Task.task_name('３番目に作成したタスク')).to include(task_a)
+        expect(Task.task_name('２番目に作成したタスク')).not_to include(task_f)
+        expect(Task.task_name('最初に作成したタスク').count).to eq 1
+      end
+    end
+    context 'scopeメソッドでステータス検索をした場合' do
+      it "ステータスに完全一致するタスクが絞り込まれる" do
+        expect(Task.status('完了')).to include(task_a)
+        expect(Task.status('着手済')).not_to include(task_a)
+        expect(Task.status('未着手').count).to eq 3
+      end
+    end
+    context 'scopeメソッドでタイトルのあいまい検索とステータス検索をした場合' do
+      it "検索キーワードをタイトルに含み、かつステータスに完全一致するタスク絞り込まれる" do
+        expect(Task.task_name('３番目に作成したタスク') && Task.status('完了')).to include(task_a)
+
       end
     end
   end

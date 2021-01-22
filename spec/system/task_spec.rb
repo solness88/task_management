@@ -33,6 +33,9 @@ RSpec.describe 'タスク管理機能', type: :system do
       task_a
       task_b
       task_c
+      task_d
+      task_e
+      task_f
       visit tasks_path
     end
     context '一覧画面に遷移した場合' do
@@ -45,9 +48,9 @@ RSpec.describe 'タスク管理機能', type: :system do
     context 'タスクが作成日時の降順に並んでいる場合' do
       it '新しいタスクが一番上に表示される' do
         task_list = all('.task_row')
-        expect(task_list[0]).to have_content "最初に作成したタスク"
-        expect(task_list[1]).to have_content "２番目に作成したタスク"
-        expect(task_list[2]).to have_content "３番目に作成したタスク"
+        expect(task_list[0]).to have_content "タスク3"
+        expect(task_list[1]).to have_content "タスク2"
+        expect(task_list[2]).to have_content "タスク1"
       end
     end
     context 'タスクが終了期限の降順に並んでいる場合' do
