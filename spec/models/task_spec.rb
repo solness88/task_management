@@ -52,7 +52,8 @@ describe 'タスクモデル機能', type: :model do
     context 'scopeメソッドでタイトルのあいまい検索とステータス検索をした場合' do
       it "検索キーワードをタイトルに含み、かつステータスに完全一致するタスク絞り込まれる" do
         expect(Task.task_name('３番目に作成したタスク') && Task.status('完了')).to include(task_a)
-
+        expect(Task.task_name('タスク') && Task.status('着手')).not_to include(task_a)
+        expect(Task.task_name('タスク') && Task.status('完了').count).to eq 2
       end
     end
   end
