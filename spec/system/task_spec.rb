@@ -62,6 +62,15 @@ RSpec.describe 'タスク管理機能', type: :system do
         expect(task_list[2]).to have_content "期限が最も早いタスク"
       end
     end
+    context 'タスクが優先順位の降順に並んでいる場合' do
+      it '優先順位の最も高いタスクが一番上に表示される' do
+        click_on '優先順位でソートする'
+        task_list = all('.task_row')
+        expect(task_list[0]).to have_content "期限が最も遅いタスク"
+        expect(task_list[1]).to have_content "期限が２番目に早いタスク"
+        expect(task_list[2]).to have_content "期限が最も早いタスク"
+      end
+    end
   end
   describe '詳細表示機能' do
     context '任意のタスク詳細画面に遷移した場合' do

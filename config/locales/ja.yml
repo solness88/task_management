@@ -36,6 +36,8 @@ ja:
       Please Confirm: 以下の内容で、送信する
       Sort by Deadline: 終了期限でソートする
       Sort by Create_time: 作成日時でソートする
+      Sort by priority: 優先順位でソートする
+
   date:
     abbr_day_names:
     - 日

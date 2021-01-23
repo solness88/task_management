@@ -7,6 +7,8 @@ class TasksController < ApplicationController
       @tasks = Task.all.order(deadline: :desc)
     elsif params[:created_at]
       @tasks = Task.all.order(created_at: :desc)
+    elsif params[:priority]
+      @tasks = Task.all.order(priority: :asc)
     end
 
     if params[:task_name].present? && params[:status].present?

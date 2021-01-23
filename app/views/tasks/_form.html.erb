@@ -27,7 +27,7 @@
   </div>
   <div class="task_new">
     <%= t('attributes.task.priority') %>
-    <%= form.text_field :priority %>
+    <%= form.select :priority, Task.priorities.keys.to_a, include_blank: "選択して下さい" %>
   </div>
 <%= form.submit %>
 <% end %>
