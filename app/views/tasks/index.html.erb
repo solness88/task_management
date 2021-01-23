@@ -25,6 +25,8 @@
     <td><%= link_to t('attributes.task.delete'), task_path(task.id), method: :delete ,data: { confirm: '本当に削除していいですか？' } %></td>
   </tr>
 <% end %>
+<%= page_entries_info @tasks %>
+<%= paginate @tasks %>
 </table>
 </br>
 <%= link_to t('attributes.task.Sort by Deadline'), tasks_path(deadline: "true") %>

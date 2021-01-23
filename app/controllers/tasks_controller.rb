@@ -18,6 +18,8 @@ class TasksController < ApplicationController
     elsif params[:status].present?
       @tasks = Task.status(params[:status])
     end
+
+    @tasks = Task.page(params[:page])
   end
 
   def new
