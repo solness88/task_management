@@ -21,10 +21,10 @@ RSpec.describe 'タスク管理機能', type: :system do
         fill_in 'task_detail', with: 'ニューヨーク'
         fill_in 'task_deadline', with:'002020-01-01'
         select "完了", from: 'task_status'
-        fill_in 'task_priority', with: 'バーミンガム'
+        select "高", from: 'task_priority'
         click_on '登録する'
         click_on '登録する'
-        expect(page).to have_content "バーミンガム"
+        expect(page).to have_content "ニューヨーク"
       end
     end
   end
@@ -40,9 +40,9 @@ RSpec.describe 'タスク管理機能', type: :system do
     end
     context '一覧画面に遷移した場合' do
       it '作成済みのタスク一覧が表示される' do
-        expect(page).to have_content "ロンドン"
-        expect(page).to have_content "ヤンゴン"
-        expect(page).to have_content "ソウル"
+        expect(page).to have_content "期限が最も遅いタスク"
+        expect(page).to have_content "タスク2の詳細"
+        expect(page).to have_content "低"
       end
     end
     context 'タスクが作成日時の降順に並んでいる場合' do
@@ -66,9 +66,9 @@ RSpec.describe 'タスク管理機能', type: :system do
       it '優先順位の最も高いタスクが一番上に表示される' do
         click_on '優先順位でソートする'
         task_list = all('.task_row')
-        expect(task_list[0]).to have_content "期限が最も遅いタスク"
-        expect(task_list[1]).to have_content "期限が２番目に早いタスク"
-        expect(task_list[2]).to have_content "期限が最も早いタスク"
+        expect(task_list[0]).to have_content "高"
+        expect(task_list[1]).to have_content "高"
+        expect(task_list[2]).to have_content "中"
       end
     end
   end
@@ -76,7 +76,7 @@ RSpec.describe 'タスク管理機能', type: :system do
     context '任意のタスク詳細画面に遷移した場合' do
       it '該当タスクの内容が表示される' do
         visit task_path(task_c)
-        expect(page).to have_content "ソウル"
+        expect(page).to have_content "最初に作成したタスク"
       end
     end
   end
