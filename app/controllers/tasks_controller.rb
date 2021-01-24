@@ -2,24 +2,24 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tasks = Task.all.order(created_at: :desc)
+    @tasks = Task.all.order(created_at: :desc).page(params[:page]).per(10)
     if params[:deadline]
-      @tasks = Task.all.order(deadline: :desc)
+      @tasks = Task.all.order(deadline: :desc).page(params[:page]).per(10)
     elsif params[:created_at]
-      @tasks = Task.all.order(created_at: :desc)
+      @tasks = Task.all.order(created_at: :desc).page(params[:page]).per(10)
     elsif params[:priority]
-      @tasks = Task.all.order(priority: :asc)
+      @tasks = Task.all.order(priority: :asc).page(params[:page]).per(10)
     end
 
     if params[:task_name].present? && params[:status].present?
-      @tasks = Task.task_name(params[:task_name]).status(params[:status])
+      @tasks = Task.task_name(params[:task_name]).status(params[:status]).page(params[:page]).per(10)
     elsif params[:task_name].present?
-      @tasks = Task.task_name(params[:task_name])
+      @tasks = Task.task_name(params[:task_name]).page(params[:page]).per(10)
     elsif params[:status].present?
-      @tasks = Task.status(params[:status])
+      @tasks = Task.status(params[:status]).page(params[:page]).per(10)
     end
 
-    @tasks = Task.page(params[:page])
+    #@tasks = Task.page(params[:page])
   end
 
   def new

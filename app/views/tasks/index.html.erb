@@ -1,35 +1,47 @@
-<%= notice %>
-<%= form_with url: tasks_path, method: :get, local: true do |f| %>
-  <%= f.text_field :task_name %>
-  <%= f.select :status, [["未着手","未着手"],["着手中","着手中"],["完了","完了"]], include_blank: "選択して下さい" %>
-  <%= f.submit '検索', name: nil %>
-<% end %>
+<h4 class="title">タスク一覧</h4>
+<table class="container">
+  <tr class="row">
+    <th class="col_md-6 new_task_button"><button type="button" class="btn btn-primary"><%= link_to t('attributes.task.create_task'), new_task_path, class:"new_task_button_text" %></button>
+    <th class="col-md-6 index_search">
+      <%= notice %>
+      <%= form_with url: tasks_path, method: :get, local: true do |f| %>
+        <%= f.text_field :task_name %>
+        <%= f.select :status, [["未着手","未着手"],["着手中","着手中"],["完了","完了"]], include_blank: "選択して下さい" %>
+        <%= f.submit '検索', name: nil %>
+      <% end %>
+    </th>
+  </tr>
+</table>
 
-<table>
-  <tr>
-    <th><%= t('attributes.task.task_name') %></th>
-    <th><%= t('attributes.task.detail') %></th>
-    <th><%= t('attributes.task.deadline') %></th>
-    <th><%= t('attributes.task.status') %></th>
-    <th><%= t('attributes.task.priority') %></th>
+<table class="container">
+  <tr class="row task_row">
+    <th class="col-md-2 index_items"><%= t('attributes.task.task_name') %></th>
+    <th class="col-md-3 index_items"><%= t('attributes.task.detail') %></th>
+    <th class="col-md-2 index_items"><%= t('attributes.task.deadline') %></th>
+    <th class="col-md-1 index_items"><%= t('attributes.task.status') %></th>
+    <th class="col-md-1 index_items"><%= t('attributes.task.priority') %></th>
+    <th class="col-md-1 index_items"></th>
+    <th class="col-md-1 index_items"></th>
+    <th class="col-md-1 index_items"></th>
   </tr>
 <% @tasks.each do |task| %>
-  <tr class = "task_row">
-    <td><%= task.task_name %></td>
-    <td><%= task.detail %></td>
-    <td><%= task.deadline %></td>
-    <td><%= task.status %></td>
-    <td><%= task.priority %></td>
-    <td><%= link_to t('attributes.task.detail_page'), task_path(task.id) %></td>
-    <td><%= link_to t('attributes.task.edit_page'), edit_task_path(task.id) %></td>
-    <td><%= link_to t('attributes.task.delete'), task_path(task.id), method: :delete ,data: { confirm: '本当に削除していいですか？' } %></td>
+  <tr class="row task_row">
+    <td class="col-md-2 index_items"><%= task.task_name %></td>
+    <td class="col-md-3 index_items"><%= task.detail %></td>
+    <td class="col-md-2 index_items"><%= task.deadline %></td>
+    <td class="col-md-1 index_items"><%= task.status %></td>
+    <td class="col-md-1 index_items"><%= task.priority %></td>
+    <td class="col-md-1 index_items "><button type="button" class="btn btn-primary"><%= link_to t('attributes.task.detail_page'), task_path(task.id), class:"index_link"%></button></td>
+    <td class="col-md-1 index_items"><button type="button" class="btn btn-success"><%= link_to t('attributes.task.edit_page'), edit_task_path(task.id), class:"index_link" %></td>
+    <td class="col-md-1 index_items"><button type="button" class="btn btn-danger"><%= link_to t('attributes.task.delete'), task_path(task.id), method: :delete ,data: { confirm: '本当に削除していいですか？' }, class:"index_link" %></td>
   </tr>
 <% end %>
-<%= page_entries_info @tasks %>
-<%= paginate @tasks %>
 </table>
-</br>
-<%= link_to t('attributes.task.Sort by Deadline'), tasks_path(deadline: "true") %>
-<%= link_to t('attributes.task.Sort by Create_time'), tasks_path(created_at: "true") %>
-<%= link_to t('attributes.task.Sort by Priority'), tasks_path(priority: "true") %>
-<%= link_to t('attributes.task.create_task'), new_task_path %>
+<%= paginate @tasks %>
+<div class="container index_sort">
+  <div class="row">
+    <div class="col-md-4"><%= link_to t('attributes.task.Sort by Deadline'), tasks_path(deadline: "true") %></div>
+    <div class="col-md-4"><%= link_to t('attributes.task.Sort by Create_time'), tasks_path(created_at: "true") %></div>
+    <div class="col-md-4"><%= link_to t('attributes.task.Sort by Priority'), tasks_path(priority: "true") %></div>
+  </div>
+</div>

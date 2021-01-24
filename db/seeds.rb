@@ -11,5 +11,5 @@
                #priority: priority
                #)
    30.times do |n|
-     Task.create(task_name: "#{n}番目のタスク", detail:"#{n}番目のタスクの詳細", deadline:"002020-01-01", status:"着手", priority:"高")
+     Task.create(task_name: "#{n}番目のタスク", detail:"#{n}番目のタスクの詳細", deadline:"002020-01-01", status:"着手中", priority:"高")
    end
