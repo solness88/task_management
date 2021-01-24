@@ -9,26 +9,50 @@
     </ul>
   </div>
 <% end %>
-  <div class="task_new">
-    <%= t('attributes.task.task_name') %>
-    <%= form.text_field :task_name %>
+
+<div class="container">
+  <div class="panel panel-primary">
+    <div class="panel-heading">フォーム1</div>
+    <div class="panel-body">
+      <form class="form-horizontal">
+        <div class="form-group task_new">
+          <label class="col-md-3 control-label"><%= t('attributes.task.task_name') %></label>
+          <div class="col-md-9 new_form">
+            <%= form.text_field :task_name, class:"form-control", type:"string" %>
+          </div>
+        </div>
+        <div class="form-group task_new">
+          <label class="col-md-3 control-label"><%= t('attributes.task.detail') %></label>
+          <div class="col-md-9 new_form">
+            <%= form.text_field :detail, class:"form-control", type:"text" %>
+          </div>
+        </div>
+        <div class="form-group task_new">
+          <label class="col-md-3 control-label"><%= t('attributes.task.deadline') %></label>
+          <div class="col-md-9 new_form">
+            <%= form.date_field :deadline %>
+          </div>
+        </div>
+
+        <div class="form-group task_new">
+          <label class="col-md-3 control-label"><%= t('attributes.task.status') %></label>
+          <div class="col-md-9 new_form">
+            <%= form.select :status, [["未着手","未着手"],["着手中","着手中"],["完了","完了"]], include_blank: "選択して下さい" %>
+          </div>
+        </div>
+        <div class="form-group task_new">
+          <label class="col-md-3 control-label"><%= t('attributes.task.priority') %></label>
+          <div class="col-md-9 new_form">
+            <%= form.select :priority, Task.priorities.keys.to_a, include_blank: "選択して下さい" %>
+          </div>
+        </div>
+      </form>
+        <div class="form-group task_new">
+          <div class="col-md-12">
+            <%= form.submit %><% end %>
+          </div>
+        </div>
+    </div>
   </div>
-  <div class="task_new">
-    <%= t('attributes.task.detail') %>
-    <%= form.text_field :detail %>
-  </div>
-  <div class="task_new">
-    <%= t('attributes.task.deadline') %>
-    <%= form.date_field :deadline %>
-  </div>
-  <div class="task_new">
-    <%= t('attributes.task.status') %>
-    <%= form.select :status, [["未着手","未着手"],["着手中","着手中"],["完了","完了"]], include_blank: "選択して下さい" %>
-  </div>
-  <div class="task_new">
-    <%= t('attributes.task.priority') %>
-    <%= form.select :priority, Task.priorities.keys.to_a, include_blank: "選択して下さい" %>
-  </div>
-<%= form.submit %>
-<% end %>
-<%= link_to t('attributes.task.backto_index'), tasks_path %>
+  <%= link_to t('attributes.task.backto_index'), tasks_path %>
+</div>
