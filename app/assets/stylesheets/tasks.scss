@@ -107,8 +107,9 @@ header ul:after {
 //新規作成ページ
 .panel-primary{
   width:600px;
-  margin-right: auto;
+  margin-right:auto;
   margin-left: auto;
+  margin-top:30px;
 }
 
 .control-label{
@@ -123,6 +124,24 @@ header ul:after {
   padding: 15px 0 30px 0;
 }
 
+//showページ
+.showpage_item{
+  margin:20px 0 20px 0;
+}
+
+.showpage_label{
+  text-align: right;
+  font-size: 20px;
+}
+
+.showpage_content{
+  text-align: left;
+  font-size: 20px;
+}
+
+.showpage_letter{
+  font-size: 10px;
+}
 
 footer {
   width: 100%;

@@ -1,6 +1,38 @@
-<h1><%= t('attributes.task.Task Detail')%></h1>
-<p><%= t('attributes.task.task_name')%><%= @task.task_name %></p>
-<p><%= t('attributes.task.detail')%><%= @task.detail %></p>
-<p><%= t('attributes.task.deadline')%><%= @task.deadline %></p>
-<p><%= t('attributes.task.status')%><%= @task.status %></p>
-<p><%= t('attributes.task.priority')%><%= @task.priority %></p>
+<div class="container">
+  <div class="panel panel-primary">
+    <div class="panel-heading"><%= t('attributes.task.Task Detail')%></div>
+    <div class="panel-body">
+        <div class="row showpage_item">
+          <label class="col-md-5 showpage_label"><%= t('attributes.task.task_name') %></label>
+          <div class="col-md-6 offset-md-1 showpage_content">
+            <%= @task.task_name %>
+          </div>
+        </div>
+        <div class="row showpage_item">
+          <label class="col-md-5 showpage_label"><%= t('attributes.task.detail')%></label>
+          <div class="col-md-6 offset-md-1 showpage_content">
+            <%= @task.detail %>
+          </div>
+        </div>
+        <div class="row showpage_item">
+          <label class="col-md-5 showpage_label"><%= t('attributes.task.deadline')%></label>
+          <div class="col-md-6 offset-md-1 showpage_content">
+            <%= @task.deadline %>
+          </div>
+        </div>
+        <div class="row showpage_item">
+          <label class="col-md-5 showpage_label"><%= t('attributes.task.status')%></label>
+          <div class="col-md-6 offset-md-1 showpage_content">
+            <%= @task.status %>
+          </div>
+        </div>
+        <div class="row showpage_item">
+          <label class="col-md-5 showpage_label"><%= t('attributes.task.priority')%></label>
+          <div class="col-md-6 offset-md-1 showpage_content">
+            <%= @task.priority %>
+          </div>
+        </div>
+    </div>
+  </div>
+  <%= link_to t('attributes.task.backto_index'), tasks_path %>
+</div>
