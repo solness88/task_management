@@ -19,21 +19,24 @@ ja:
       Detail: 詳細
       Deadline: 期限
       Status: 状況
-      Priority: 優先順位
+      Priority: 優先度
       task_name: タスク名　
       detail: 詳細　
       deadline: 期限　
       status: 状況　
-      priority: 優先順位　
-      detail_page: タスクの詳細を見る
-      edit_page: タスクを編集する
-      delete: タスクを削除する
+      priority: 優先度
+      detail_page: 詳細
+      edit_page: 編集
+      delete: 削除
       Task Detail: タスクの詳細
-      create_task: 新しくタスクを作成する
+      create_task: タスク作成
       backto_index: タスク一覧画面に戻る
       submit: 登録する
       back: 戻る
       Please Confirm: 以下の内容で、送信する
+      Sort by Deadline: 終了期限でソートする
+      Sort by Create_time: 作成日時でソートする
+      Sort by Priority: 優先順位でソートする
   date:
     abbr_day_names:
     - 日

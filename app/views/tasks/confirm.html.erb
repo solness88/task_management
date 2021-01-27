@@ -1,15 +1,56 @@
-<h3><%= t('attributes.task.Please Confirm') %></h3>
-<%= form_with(model: @task, local: true) do |form| %>
-  <%= form.hidden_field :task_name %>
-  <%= form.hidden_field :detail %>
-  <%= form.hidden_field :deadline %>
-  <%= form.hidden_field :status %>
-  <%= form.hidden_field :priority %>
-  <p><%= t('attributes.task.task_name') %><%= @task.task_name %></p>
-  <p><%= t('attributes.task.detail') %><%= @task.detail %></p>
-  <p><%= t('attributes.task.deadline') %><%= @task.deadline %></p>
-  <p><%= t('attributes.task.status') %><%= @task.status %></p>
-  <p><%= t('attributes.task.priority') %><%= @task.priority %></p>
-  <%= form.submit t('attributes.task.submit') %>
-  <%= form.submit t('attributes.task.back'), name: "back" %>
-<% end %>
+<div class="container">
+  <div class="panel panel-primary">
+    <div class="panel-heading"><%= t('attributes.task.Please Confirm') %></div>
+    <div class="panel-body">
+        <div class="row showpage_item">
+          <%= form_with(model: @task, local: true) do |form| %>
+          <label class="col-md-5 showpage_label">
+            <%= form.hidden_field :task_name %>
+            <%= t('attributes.task.task_name') %>
+          </label>
+          <div class="col-md-6 offset-md-1 showpage_content">
+            <%= @task.task_name %>
+          </div>
+        </div>
+        <div class="row showpage_item">
+          <label class="col-md-5 showpage_label">
+            <%= form.hidden_field :detail %>
+            <%= t('attributes.task.detail') %>
+          </label>
+          <div class="col-md-6 offset-md-1 showpage_content">
+            <%= @task.detail %>
+          </div>
+        </div>
+        <div class="row showpage_item">
+          <label class="col-md-5 showpage_label">
+            <%= form.hidden_field :deadline %>
+            <%= t('attributes.task.deadline') %>
+          </label>
+          <div class="col-md-6 offset-md-1 showpage_content">
+            <%= @task.deadline %>
+          </div>
+        </div>
+        <div class="row showpage_item">
+          <label class="col-md-5 showpage_label">
+            <%= form.hidden_field :status %>
+            <%= t('attributes.task.status') %>
+          </label>
+          <div class="col-md-6 offset-md-1 showpage_content">
+            <%= @task.status %>
+          </div>
+        </div>
+        <div class="row showpage_item">
+          <label class="col-md-5 showpage_label">
+            <%= form.hidden_field :priority %>
+            <%= t('attributes.task.priority') %>
+          </label>
+          <div class="col-md-6 offset-md-1 showpage_content">
+            <%= @task.priority %>
+          </div>
+        </div>
+        <%= form.submit t('attributes.task.submit') %>
+        <%= form.submit t('attributes.task.back'), name: "back" %>
+      <% end %>
+    </div>
+  </div>
+</div>
