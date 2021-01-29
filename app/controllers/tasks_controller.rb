@@ -2,21 +2,21 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tasks = Task.all.order(created_at: :desc).page(params[:page]).per(10)
+    @tasks = Task.where(user_id:current_user.id).order(created_at: :desc).page(params[:page]).per(10)
     if params[:deadline]
-      @tasks = Task.all.order(deadline: :desc).page(params[:page]).per(10)
+      @tasks = Task.where(user_id:current_user.id).order(deadline: :desc).page(params[:page]).per(10)
     elsif params[:created_at]
-      @tasks = Task.all.order(created_at: :desc).page(params[:page]).per(10)
+      @tasks = Task.where(user_id:current_user.id).order(created_at: :desc).page(params[:page]).per(10)
     elsif params[:priority]
-      @tasks = Task.all.order(priority: :asc).page(params[:page]).per(10)
+      @tasks = Task.where(user_id:current_user.id).order(priority: :asc).page(params[:page]).per(10)
     end
 
     if params[:task_name].present? && params[:status].present?
-      @tasks = Task.task_name(params[:task_name]).status(params[:status]).page(params[:page]).per(10)
+      @tasks = Task.where(user_id:current_user.id).task_name(params[:task_name]).status(params[:status]).page(params[:page]).per(10)
     elsif params[:task_name].present?
-      @tasks = Task.task_name(params[:task_name]).page(params[:page]).per(10)
+      @tasks = Task.where(user_id:current_user.id).task_name(params[:task_name]).page(params[:page]).per(10)
     elsif params[:status].present?
-      @tasks = Task.status(params[:status]).page(params[:page]).per(10)
+      @tasks = Task.where(user_id:current_user.id).status(params[:status]).page(params[:page]).per(10)
     end
 
     #@tasks = Task.page(params[:page])
@@ -71,4 +71,5 @@ class TasksController < ApplicationController
   def set_task
     @task = Task.find(params[:id])
   end
+
 end
