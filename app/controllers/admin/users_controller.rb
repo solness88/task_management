@@ -3,7 +3,6 @@ before_action :set_user, only:[:show, :edit, :update, :destroy]
 before_action :authenticate_user, only:[:index]
 
   def index
-    @users = User.all
   end
 
   def new
@@ -11,7 +10,7 @@ before_action :authenticate_user, only:[:index]
   end
 
   def create
-    User.create(user_params)
+    @user = User.create(user_params)
     if params[:back]
       render :new
     else
@@ -47,7 +46,7 @@ before_action :authenticate_user, only:[:index]
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :admin)
   end
 
   def set_user

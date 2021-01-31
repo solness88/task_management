@@ -11,7 +11,7 @@ class User < ApplicationRecord
   private
   def delete_check
     if self.admin?
-      if User.where(admin: :true).count == 1 &&
+      if User.where(admin: :true).count == 1
       throw(:abort)
       end
     end
