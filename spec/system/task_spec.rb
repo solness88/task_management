@@ -7,12 +7,12 @@ def visit_with_http_auth(path)
 end
 
 RSpec.describe 'タスク管理機能', type: :system do
-  let(:task_a) { FactoryBot.create(:task) }
-  let(:task_b) { FactoryBot.create(:second_task) }
-  let(:task_c) { FactoryBot.create(:third_task) }
-  let(:task_d) { FactoryBot.create(:fourth_task) }
-  let(:task_e) { FactoryBot.create(:fifth_task) }
-  let(:task_f) { FactoryBot.create(:sixth_task) }
+  let(:task_a) { FactoryBot.create(:task, user: user) }
+  let(:task_b) { FactoryBot.create(:second_task, user: user) }
+  let(:task_c) { FactoryBot.create(:third_task, user: user) }
+  let(:task_d) { FactoryBot.create(:fourth_task, user: user) }
+  let(:task_e) { FactoryBot.create(:fifth_task, user: user) }
+  let(:task_f) { FactoryBot.create(:sixth_task, user: user) }
   before do
     visit_with_http_auth new_user_path
     fill_in 'user_name', with: 'test'
