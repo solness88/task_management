@@ -15,8 +15,8 @@ RSpec.describe 'タスク管理機能', type: :system do
   let(:task_f) { FactoryBot.create(:sixth_task) }
   before do
     visit_with_http_auth new_user_path
-    fill_in 'user_name', with: 'japan'
-    fill_in 'user_email', with: 'japan@japan.com'
+    fill_in 'user_name', with: 'test'
+    fill_in 'user_email', with: 'test@test.com'
     fill_in 'user_password', with: '12345qwert'
     fill_in 'user_password_confirmation', with: '12345qwert'
     click_on 'Create my account'
@@ -38,17 +38,13 @@ RSpec.describe 'タスク管理機能', type: :system do
   end
   describe '一覧表示機能' do
     before do
-      user = FactoryBot.create(:user)
-      second_user = FactoryBot.create(:second_user)
-      third_user = FactoryBot.create(:third_user)
-      FactoryBot.create(:task, user: user)
-      FactoryBot.create(:second_task, user: second_user)
-      FactoryBot.create(:third_task, user: third_user)
+      task_a
+      task_b
+      task_c
       visit tasks_path
     end
     context '一覧画面に遷移した場合' do
       it '作成済みのタスク一覧が表示される' do
-        sleep(1)
         expect(page).to have_content "期限が最も遅いタスク"
         expect(page).to have_content "２番目に作成したタスク"
         expect(page).to have_content "期限が最も早いタスク"
@@ -56,7 +52,6 @@ RSpec.describe 'タスク管理機能', type: :system do
     end
     context 'タスクが作成日時の降順に並んでいる場合' do
       it '新しいタスクが一番上に表示される' do
-        sleep(1)
         task_list = all('.task_row')
         expect(task_list[0]).to have_content "タスク3"
         expect(task_list[1]).to have_content "タスク2"
@@ -66,7 +61,6 @@ RSpec.describe 'タスク管理機能', type: :system do
     context 'タスクが終了期限の降順に並んでいる場合' do
       it '終了期限の最も近いタスクが一番上に表示される' do
         click_on '終了期限でソートする'
-        sleep(1)
         task_list = all('.task_row')
         expect(task_list[0]).to have_content "期限が最も遅いタスク"
         expect(task_list[1]).to have_content "期限が２番目に早いタスク"
@@ -76,7 +70,6 @@ RSpec.describe 'タスク管理機能', type: :system do
     context 'タスクが優先順位の降順に並んでいる場合' do
       it '優先順位の最も高いタスクが一番上に表示される' do
         click_on '優先順位でソートする'
-        sleep(1)
         task_list = all('.task_row')
         expect(task_list[0]).to have_content "高"
         expect(task_list[1]).to have_content "高"
@@ -139,6 +132,5 @@ RSpec.describe 'タスク管理機能', type: :system do
         expect(page).to have_content "tokyo@tokyo.com"
       end
     end
-
   end
 end
