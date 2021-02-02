@@ -7,6 +7,8 @@ def visit_with_http_auth(path)
 end
 
 RSpec.describe 'タスク管理機能', type: :system do
+  user = FactoryBot.create(:user)
+  admin_user = FactoryBot.create(:admin_user)
   let(:task_a) { FactoryBot.create(:task, user: user) }
   let(:task_b) { FactoryBot.create(:second_task, user: user) }
   let(:task_c) { FactoryBot.create(:third_task, user: user) }
@@ -53,9 +55,9 @@ RSpec.describe 'タスク管理機能', type: :system do
     context 'タスクが作成日時の降順に並んでいる場合' do
       it '新しいタスクが一番上に表示される' do
         task_list = all('.task_row')
-        expect(task_list[0]).to have_content "タスク3"
-        expect(task_list[1]).to have_content "タスク2"
-        expect(task_list[2]).to have_content "タスク1"
+        expect(task_list[0]).to have_content "最初に作成したタスク"
+        expect(task_list[1]).to have_content "２番目に作成したタスク"
+        expect(task_list[2]).to have_content "３番目に作成したタスク"
       end
     end
     context 'タスクが終了期限の降順に並んでいる場合' do
@@ -72,8 +74,8 @@ RSpec.describe 'タスク管理機能', type: :system do
         click_on '優先順位でソートする'
         task_list = all('.task_row')
         expect(task_list[0]).to have_content "高"
-        expect(task_list[1]).to have_content "高"
-        expect(task_list[2]).to have_content "中"
+        expect(task_list[1]).to have_content "中"
+        expect(task_list[2]).to have_content "低"
       end
     end
   end
@@ -119,10 +121,12 @@ RSpec.describe 'タスク管理機能', type: :system do
     end
   end
   describe 'ユーザー登録機能' do
+    before do
+      visit tasks_path
+      click_link 'Logout'
+    end
     context 'ユーザーを新規登録した場合' do
       it '作成したユーザーが一覧ページに表示される' do
-        visit tasks_path
-        click_link 'Logout'
         visit_with_http_auth new_user_path
         fill_in 'user_name', with: 'tokyo'
         fill_in 'user_email', with: 'tokyo@tokyo.com'
@@ -130,6 +134,28 @@ RSpec.describe 'タスク管理機能', type: :system do
         fill_in 'user_password_confirmation', with:'12345qwert'
         click_on 'Create my account'
         expect(page).to have_content "tokyo@tokyo.com"
+      end
+    end
+    context 'ログインせずタスク一覧画面に飛ぼうとしたとき' do
+      it 'ログイン画面に遷移する' do
+        visit tasks_path
+        expect(page).to have_content "Log in"
+      end
+    end
+  end
+  describe 'セッション機能' do
+    before do
+      tasks_path
+      click_link 'Logout'
+      visit_with_http_auth new_user_path
+    end
+    context 'ログインに成功した場合' do
+      it 'ユーザーの詳細ページに遷移する' do
+        visit_with_http_auth new_session_path
+        fill_in 'session_email', with: 'test@test.com'
+        fill_in 'session_password', with: '12345qwert'
+        click_on 'Log in'
+        expect(page).to have_content "test@test.com"
       end
     end
   end
