@@ -10,5 +10,6 @@ FactoryBot.define do
     email {'osaka@osaka.com'}
     password {'12345qwert'}
     password_confirmation {'12345qwert'}
+    check '管理者権限'
   end
 end
