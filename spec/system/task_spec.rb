@@ -159,11 +159,8 @@ RSpec.describe 'タスク管理機能', type: :system do
     end
     context '一般ユーザーが他人の詳細ページに飛んだ場合' do
       it 'タスク一覧画面に遷移する' do
-        visit_with_http_auth new_session_path
-        fill_in 'session_email', with: 'test@test.com'
-        fill_in 'session_password', with: '12345qwert'
-        click_on 'Log in'
-        expect(page).to have_content "test@test.com"
+        get :show, params: {id: admin_user.id}
+        expect(page).to have_content "osaka@osaka.com"
       end
     end
   end
