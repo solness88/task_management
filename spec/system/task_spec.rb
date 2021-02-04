@@ -8,7 +8,7 @@ end
 
 RSpec.describe 'タスク管理機能', type: :system do
   user = FactoryBot.create(:user)
-  admin_user = FactoryBot.create(:admin_user)
+  let(:admin_user) { FactoryBot.create(:admin_user) }
   let(:task_a) { FactoryBot.create(:task, user: user) }
   let(:task_b) { FactoryBot.create(:second_task, user: user) }
   let(:task_c) { FactoryBot.create(:third_task, user: user) }
@@ -47,6 +47,7 @@ RSpec.describe 'タスク管理機能', type: :system do
     end
     context '一覧画面に遷移した場合' do
       it '作成済みのタスク一覧が表示される' do
+        sleep 0.5
         expect(page).to have_content "期限が最も遅いタスク"
         expect(page).to have_content "２番目に作成したタスク"
         expect(page).to have_content "期限が最も早いタスク"
@@ -55,6 +56,7 @@ RSpec.describe 'タスク管理機能', type: :system do
     context 'タスクが作成日時の降順に並んでいる場合' do
       it '新しいタスクが一番上に表示される' do
         task_list = all('.task_row')
+        sleep 0.5
         expect(task_list[0]).to have_content "最初に作成したタスク"
         expect(task_list[1]).to have_content "２番目に作成したタスク"
         expect(task_list[2]).to have_content "３番目に作成したタスク"
@@ -62,16 +64,19 @@ RSpec.describe 'タスク管理機能', type: :system do
     end
     context 'タスクが終了期限の降順に並んでいる場合' do
       it '終了期限の最も近いタスクが一番上に表示される' do
+        save_and_open_page
         click_on '終了期限でソートする'
+        sleep 0.5
         task_list = all('.task_row')
-        expect(task_list[0]).to have_content "期限が最も遅いタスク"
+        expect(task_list[0]).to have_content "期限が最も早いタスク"
         expect(task_list[1]).to have_content "期限が２番目に早いタスク"
-        expect(task_list[2]).to have_content "期限が最も早いタスク"
+        expect(task_list[2]).to have_content "期限が最も遅いタスク"
       end
     end
     context 'タスクが優先順位の降順に並んでいる場合' do
       it '優先順位の最も高いタスクが一番上に表示される' do
         click_on '優先順位でソートする'
+        sleep 0.5
         task_list = all('.task_row')
         expect(task_list[0]).to have_content "高"
         expect(task_list[1]).to have_content "中"
@@ -123,7 +128,7 @@ RSpec.describe 'タスク管理機能', type: :system do
   describe 'ユーザー登録機能' do
     before do
       visit tasks_path
-      click_link 'Logout'
+      click_on 'Logout'
     end
     context 'ユーザーを新規登録した場合' do
       it '作成したユーザーが一覧ページに表示される' do
@@ -159,7 +164,33 @@ RSpec.describe 'タスク管理機能', type: :system do
     end
     context '一般ユーザーが他人の詳細ページに飛んだ場合' do
       it 'タスク一覧画面に遷移する' do
-        get :show, params: {id: admin_user.id}
+        admin_user
+        visit user_path(admin_user)
+        expect(page).to have_content "タスク名"
+      end
+    end
+    context 'ログアウトすると' do
+      it 'ログイン画面に遷移する' do
+        click_on 'Logout'
+        expect(page).to have_content "Email"
+        expect(page).to have_content "Password"
+      end
+    end
+  end
+  describe '管理画面' do
+    context '管理ユーザーが管理画面にアクセスすると' do
+      it 'ユーザー一覧が表示される' do
+        click_on 'Logout'
+        visit new_admin_user_path
+        save_and_open_page
+        fill_in 'user_name', with: 'osaka'
+        fill_in 'user_email', with: 'osaka@osaka.com'
+        fill_in 'user_password', with:'12345qwert'
+        fill_in 'user_password_confirmation', with:'12345qwert'
+        check('admin', allow_label_click: true)
+        click_on 'Create my account'
+        visit admin_users_path
+        expect(page).to have_content "osaka"
         expect(page).to have_content "osaka@osaka.com"
       end
     end
