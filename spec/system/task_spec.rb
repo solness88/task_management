@@ -22,6 +22,7 @@ RSpec.describe 'タスク管理機能', type: :system do
     fill_in 'user_password', with: '12345qwert'
     fill_in 'user_password_confirmation', with: '12345qwert'
     click_on 'Create my account'
+    admin_user
   end
   describe '新規作成機能' do
     context 'タスクを新規作成した場合' do
@@ -64,7 +65,6 @@ RSpec.describe 'タスク管理機能', type: :system do
     end
     context 'タスクが終了期限の降順に並んでいる場合' do
       it '終了期限の最も近いタスクが一番上に表示される' do
-        save_and_open_page
         click_on '終了期限でソートする'
         sleep 0.5
         task_list = all('.task_row')
@@ -179,17 +179,15 @@ RSpec.describe 'タスク管理機能', type: :system do
   end
   describe '管理画面' do
     context '管理ユーザーが管理画面にアクセスすると' do
-      it 'ユーザー一覧が表示される' do
+      before do
         click_on 'Logout'
-        visit new_admin_user_path
-        save_and_open_page
-        fill_in 'user_name', with: 'osaka'
-        fill_in 'user_email', with: 'osaka@osaka.com'
-        fill_in 'user_password', with:'12345qwert'
-        fill_in 'user_password_confirmation', with:'12345qwert'
-        check('admin', allow_label_click: true)
-        click_on 'Create my account'
+        click_on 'Log in'
+        fill_in 'session_email', with: 'osaka@osaka.com'
+        fill_in 'session_password', with:'12345qwert'
+        click_on 'Log in'
         visit admin_users_path
+      end
+      it 'ユーザー一覧が表示される' do
         expect(page).to have_content "osaka"
         expect(page).to have_content "osaka@osaka.com"
       end

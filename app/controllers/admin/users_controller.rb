@@ -1,6 +1,6 @@
 class Admin::UsersController < ApplicationController
 before_action :set_user, only:[:show, :edit, :update, :destroy]
-before_action :authenticate_user, only:[:index]
+before_action :authenticate_user
 
   def index
   end
@@ -55,12 +55,10 @@ before_action :authenticate_user, only:[:index]
 
   def authenticate_user
     @users = User.all
-    if current_user.admin == false
-      redirect_to tasks_path, notice:"管理者以外はアクセスできません"
-    else
+    if logged_in?
       render action: "index"
+    else
+      redirect_to tasks_path, notice:"管理者以外はアクセスできません"
     end
   end
-
-
 end
