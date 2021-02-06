@@ -7,22 +7,25 @@ def visit_with_http_auth(path)
 end
 
 RSpec.describe 'タスク管理機能', type: :system do
-  user = FactoryBot.create(:user)
-  let(:admin_user) { FactoryBot.create(:admin_user) }
-  let(:task_a) { FactoryBot.create(:task, user: user) }
-  let(:task_b) { FactoryBot.create(:second_task, user: user) }
-  let(:task_c) { FactoryBot.create(:third_task, user: user) }
-  let(:task_d) { FactoryBot.create(:fourth_task, user: user) }
-  let(:task_e) { FactoryBot.create(:fifth_task, user: user) }
-  let(:task_f) { FactoryBot.create(:sixth_task, user: user) }
   before do
+    @user = FactoryBot.create(:user)
+    @admin_user = FactoryBot.create(:admin_user)
+    @test_user = FactoryBot.create(:test_user)
+  #let(:task_a) { FactoryBot.create(:task, user: user) }
+  #let(:task_b) { FactoryBot.create(:second_task, user: user) }
+  #let(:task_c) { FactoryBot.create(:third_task, user: user) }
+  #let(:task_d) { FactoryBot.create(:fourth_task, user: user) }
+  #let(:task_e) { FactoryBot.create(:fifth_task, user: user) }
+  #let(:task_f) { FactoryBot.create(:sixth_task, user: user) }
+  #before do
     visit_with_http_auth new_user_path
-    fill_in 'user_name', with: 'test'
-    fill_in 'user_email', with: 'test@test.com'
+    fill_in 'user_name', with: 'tokyo'
+    fill_in 'user_email', with: 'tokyo@tokyo.com'
     fill_in 'user_password', with: '12345qwert'
     fill_in 'user_password_confirmation', with: '12345qwert'
     click_on 'Create my account'
-    admin_user
+    #admin_user
+    #test_user
   end
   describe '新規作成機能' do
     context 'タスクを新規作成した場合' do
@@ -41,9 +44,9 @@ RSpec.describe 'タスク管理機能', type: :system do
   end
   describe '一覧表示機能' do
     before do
-      task_a
-      task_b
-      task_c
+      FactoryBot.create(:task, user: @user)
+      FactoryBot.create(:second_task, user: @user)
+      FactoryBot.create(:third_task, user: @user)
       visit tasks_path
     end
     context '一覧画面に遷移した場合' do
@@ -94,9 +97,9 @@ RSpec.describe 'タスク管理機能', type: :system do
   end
   describe '検索機能' do
     before do
-      task_d
-      task_e
-      task_f
+      task_d = FactoryBot.create(:fourth_task, user: @user)
+      task_e = FactoryBot.create(:fifth_task, user: @user)
+      task_f = FactoryBot.create(:sixth_task, user: @user)
       visit tasks_path
     end
     context 'タイトルであいまい検索をした場合' do
@@ -164,8 +167,8 @@ RSpec.describe 'タスク管理機能', type: :system do
     end
     context '一般ユーザーが他人の詳細ページに飛んだ場合' do
       it 'タスク一覧画面に遷移する' do
-        admin_user
-        visit user_path(admin_user)
+        #admin_user
+        visit user_path(@admin_user)
         expect(page).to have_content "タスク名"
       end
     end
@@ -190,6 +193,71 @@ RSpec.describe 'タスク管理機能', type: :system do
       it 'ユーザー一覧が表示される' do
         expect(page).to have_content "osaka"
         expect(page).to have_content "osaka@osaka.com"
+        expect(page).to have_content "test"
+        expect(page).to have_content "test@test.com"
+      end
+    end
+    context '一般ユーザーが管理画面にアクセスしようとすると' do
+      before do
+        click_on 'Logout'
+        click_on 'Log in'
+        fill_in 'session_email', with: 'test@test.com'
+        fill_in 'session_password', with:'12345qwert'
+        click_on 'Log in'
+        visit admin_users_path
+      end
+      it '管理画面にはアクセスできずタスク一覧画面に遷移する' do
+        expect(page).to have_content "管理者以外はアクセスできません"
+      end
+    end
+    before do
+      click_on 'Logout'
+      click_on 'Log in'
+      fill_in 'session_email', with: 'osaka@osaka.com'
+      fill_in 'session_password', with:'12345qwert'
+      click_on 'Log in'
+      visit admin_users_path
+    end
+    context '管理ユーザーがユーザーを新規登録すると' do
+      it '新規登録したユーザーの詳細画面が表示される' do
+        visit new_admin_user_path
+        fill_in 'user_name', with: 'sapporo'
+        fill_in 'user_email', with: 'sapporo@sapporo.com'
+        fill_in 'user_password', with: '12345qwert'
+        fill_in 'user_password_confirmation', with: '12345qwert'
+        click_on 'Create my account'
+        expect(page).to have_content "sapporo"
+        expect(page).to have_content "sapporo@sapporo.com"
+      end
+    end
+    context '管理ユーザーがユーザーの詳細画面にアクセスすると' do
+      it 'ユーザーの詳細情報が表示される' do
+        visit admin_user_path(@test_user)
+        expect(page).to have_content "fukuoka"
+        expect(page).to have_content "fukuoka@fukuoka.com"
+      end
+    end
+    context '管理ユーザーがユーザー情報を編集すると' do
+      it '一覧画面に編集したユーザー情報が表示される' do
+        visit edit_admin_user_path(@admin_user)
+        fill_in 'user_name', with: 'aomori'
+        fill_in 'user_email', with: 'aomori@aomori.com'
+        fill_in 'user_password', with: '12345qwert'
+        fill_in 'user_password_confirmation', with: '12345qwert'
+        check '管理者権限'
+        click_on 'Create my account'
+        expect(page).to have_content "aomori"
+        expect(page).to have_content "aomori@aomori.com"
+      end
+    end
+    context '管理ユーザーがユーザー情報を削除すると' do
+      it '削除したユーザー名が一覧画面に表示されなくなる' do
+        visit admin_user_path(@test_user)
+        page.accept_confirm do
+          click_on '削除'
+        end
+        expect(page).not_to have_content "fukuoka"
+        expect(page).not_to have_content "fukuoka@fukuoka.com"
       end
     end
   end

@@ -55,9 +55,7 @@ before_action :authenticate_user
 
   def authenticate_user
     @users = User.all
-    if logged_in?
-      render action: "index"
-    else
+    unless logged_in? && current_user.admin == true
       redirect_to tasks_path, notice:"管理者以外はアクセスできません"
     end
   end
