@@ -95,4 +95,12 @@ FactoryBot.define do
     priority {'低'}
     association :user
   end
+  factory :thirteenth_task, class: Task do
+    task_name {'タスク3'}
+    detail {'タスク3の詳細'}
+    deadline {'002015-01-01'}
+    status {'未着手'}
+    priority {'低'}
+    association :user
+  end
 end
