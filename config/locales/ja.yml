@@ -8,12 +8,6 @@ ja:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
   attributes:
-    user:
-      name: 名前
-      email: メールアドレス
-      password: パスワード
-      activated: アクティブフラグ
-      admin: 管理者フラグ
     task:
       Task name: タスク名
       Detail: 詳細
@@ -37,6 +31,13 @@ ja:
       Sort by Deadline: 終了期限でソートする
       Sort by Create_time: 作成日時でソートする
       Sort by Priority: 優先順位でソートする
+    user:
+      name: 名前
+      email: メールアドレス
+      password: パスワード
+      activated: アクティブフラグ
+      admin: 管理者フラグ
+      other:
   date:
     abbr_day_names:
     - 日

@@ -16,7 +16,8 @@
 <table class="container">
   <tr class="row">
     <th class="col-md-2 index_items"><%= t('attributes.task.task_name') %></th>
-    <th class="col-md-3 index_items"><%= t('attributes.task.detail') %></th>
+    <th class="col-md-2 index_items"><%= t('attributes.task.detail') %></th>
+    <th class="col-md-1 index_items"><%= t('attributes.task.detail') %></th>
     <th class="col-md-2 index_items"><%= t('attributes.task.deadline') %></th>
     <th class="col-md-1 index_items"><%= t('attributes.task.status') %></th>
     <th class="col-md-1 index_items"><%= t('attributes.task.priority') %></th>
@@ -27,7 +28,8 @@
 <% @tasks.each do |task| %>
   <tr class="row task_row">
     <td class="col-md-2 index_items"><%= task.task_name %></td>
-    <td class="col-md-3 index_items"><%= task.detail %></td>
+    <td class="col-md-2 index_items"><%= task.detail %></td>
+    <td class="col-md-1 index_items"><%= task.user.name %></td>
     <td class="col-md-2 index_items"><%= task.deadline %></td>
     <td class="col-md-1 index_items"><%= task.status %></td>
     <td class="col-md-1 index_items"><%= task.priority %></td>
@@ -45,3 +47,5 @@
     <div class="col-md-4"><%= link_to t('attributes.task.Sort by Priority'), tasks_path(priority: "true") %></div>
   </div>
 </div>
+
+<%= link_to "管理者画面へ", admin_users_path %>
