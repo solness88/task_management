@@ -46,6 +46,12 @@
             <%= form.select :priority, Task.priorities.keys.to_a, include_blank: "選択して下さい" %>
           </div>
         </div>
+        <div class="form-group task_new">
+          <label class="col-md-3 control-label"><%= t('attributes.task.priority') %></label>
+          <div class="col-md-9 new_form">
+            <%= form.collection_check_boxes(:label_ids, Label.all, :id, :name) %>
+          </div>
+        </div>
       </form>
         <div class="form-group task_new">
           <div class="col-md-12">
