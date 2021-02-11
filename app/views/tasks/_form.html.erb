@@ -47,9 +47,11 @@
           </div>
         </div>
         <div class="form-group task_new">
-          <label class="col-md-3 control-label"><%= t('attributes.task.priority') %></label>
+          <% Label.all.each do |label| %>
+          <label class="col-md-3 control-label"><%= label.name %></label>
           <div class="col-md-9 new_form">
-            <%= form.collection_check_boxes(:label_ids, Label.all, :id, :name) %>
+            <%= form.check_box :label_ids, { multiple: true, checked: label[:checked], disabled: label[:disabled], include_hidden: false }, label[:id] %>
+          <% end %>
           </div>
         </div>
       </form>
