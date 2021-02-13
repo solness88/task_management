@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   end
   resources :sessions, only: [:new, :create, :destroy]
   resources :users, only: [:new, :create, :show]
-  resources :task_labels, only: [:create, :destroy]
+  resources :labellings, only: [:create, :destroy]
   namespace :admin do
     resources :users
   end

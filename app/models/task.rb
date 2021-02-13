@@ -7,6 +7,7 @@ class Task < ApplicationRecord
   enum priority: { 高:0, 中:1, 低:2 }
   belongs_to :user
   has_many :labellings, dependent: :destroy
-  accepts_nested_attributes_for :labellings, allow_destroy: true
+  has_many :labels, through: :labellings
+  #accepts_nested_attributes_for :labellings, allow_destroy: true
   #paginates_per 10
 end
