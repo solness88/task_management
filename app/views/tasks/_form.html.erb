@@ -47,8 +47,10 @@
           </div>
         </div>
         <% Label.all.each do |label| %>
-          <%= label.name %><%= form.check_box :label_ids, { multiple: true, checked: label[:checked], disabled: label[:disabled], include_hidden: false }, label[:id] %>
+          <%= form.check_box :label_ids, { multiple: true, checked: label[:checked], disabled: label[:disabled], include_hidden: false }, label[:id] %>
+          <%= label.name %>
         <% end %>
+
       </form>
         <div class="form-group task_new">
           <div class="col-md-12">

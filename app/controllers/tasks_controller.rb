@@ -18,8 +18,6 @@ class TasksController < ApplicationController
     elsif params[:status].present?
       @tasks = Task.where(user_id:current_user.id).status(params[:status]).page(params[:page]).per(10)
     end
-
-    #@tasks = Task.page(params[:page])
   end
 
   def new
