@@ -46,10 +46,17 @@
             <%= form.select :priority, Task.priorities.keys.to_a, include_blank: "選択して下さい" %>
           </div>
         </div>
+
         <% Label.all.each do |label| %>
-          <%= form.check_box :label_ids, { multiple: true, checked: label[:checked], disabled: label[:disabled], include_hidden: false }, label[:id] %>
-          <%= label.name %>
-        <% end %>
+            <% if action_name == 'new' || action_name == 'create' %>
+              <%= form.check_box :label_ids, { multiple: true, checked: label[:checked], disabled: label[:disabled], include_hidden: false}, label[:id], "" %>
+              <label><%= label.name %></label>
+            <% elsif action_name == 'edit' || action_name == 'update' %>
+              <%= form.check_box :label_ids, { multiple: true, checked: @task.label_ids.include?(label.id), disabled: label[:disabled], include_hidden: false}, label[:id], "" %>
+              <label><%= label.name %></label>
+            <% end %>
+          <% end %>
+
 
       </form>
         <div class="form-group task_new">
