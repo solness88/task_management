@@ -61,6 +61,7 @@ class TasksController < ApplicationController
 
   def confirm
     @task = current_user.tasks.build(task_params)
+    @labels = @task.labels
     render :new if @task.invalid?
   end
 

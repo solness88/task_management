@@ -6,6 +6,10 @@ FactoryBot.define do
     status {'完了'}
     priority {'高'}
     association :user
+    after(:build) do |task|
+      label = create(:label)
+      task.labellings << build(:labelling, task: task, label: label)
+    end
   end
   factory :second_task, class: Task do
     task_name {'２番目に作成したタスク'}
@@ -14,6 +18,10 @@ FactoryBot.define do
     status {'着手'}
     priority {'中'}
     association :user
+    after(:build) do |task|
+      label = create(:label)
+      task.labellings << build(:labelling, task: task, label: label)
+    end
   end
   factory :third_task, class: Task do
     task_name {'最初に作成したタスク'}
@@ -22,6 +30,10 @@ FactoryBot.define do
     status {'未着手'}
     priority {'低'}
     association :user
+    after(:build) do |task|
+      label = create(:label)
+      task.labellings << build(:labelling, task: task, label: label)
+    end
   end
   factory :fourth_task, class: Task do
     task_name {'タスク1'}
@@ -30,6 +42,10 @@ FactoryBot.define do
     status {'完了'}
     priority {'高'}
     association :user
+    after(:build) do |task|
+      label = create(:label)
+      task.labellings << build(:labelling, task: task, label: label)
+    end
   end
   factory :fifth_task, class: Task do
     task_name {'タスク2'}
@@ -38,6 +54,10 @@ FactoryBot.define do
     status {'未着手'}
     priority {'中'}
     association :user
+    after(:build) do |task|
+      label = create(:label)
+      task.labellings << build(:labelling, task: task, label: label)
+    end
   end
   factory :sixth_task, class: Task do
     task_name {'タスク3'}
@@ -46,6 +66,10 @@ FactoryBot.define do
     status {'未着手'}
     priority {'低'}
     association :user
+    after(:build) do |task|
+      label = create(:label)
+      task.labellings << build(:labelling, task: task, label: label)
+    end
   end
   factory :seventh_task, class: Task do
     task_name {'３番目に作成したタスク'}
@@ -54,6 +78,10 @@ FactoryBot.define do
     status {'完了'}
     priority {'高'}
     association :user
+    after(:build) do |task|
+      label = create(:label)
+      task.labellings << build(:labelling, task: task, label: label)
+    end
   end
   factory :eighth_task, class: Task do
     task_name {'２番目に作成したタスク'}
@@ -62,6 +90,10 @@ FactoryBot.define do
     status {'着手'}
     priority {'中'}
     association :user
+    after(:build) do |task|
+      label = create(:label)
+      task.labellings << build(:labelling, task: task, label: label)
+    end
   end
   factory :ninth_task, class: Task do
     task_name {'最初に作成したタスク'}
@@ -70,6 +102,10 @@ FactoryBot.define do
     status {'未着手'}
     priority {'低'}
     association :user
+    after(:build) do |task|
+      label = create(:label)
+      task.labellings << build(:labelling, task: task, label: label)
+    end
   end
   factory :tenth_task, class: Task do
     task_name {'タスク1'}
@@ -78,6 +114,10 @@ FactoryBot.define do
     status {'完了'}
     priority {'高'}
     association :user
+    after(:build) do |task|
+      label = create(:label)
+      task.labellings << build(:labelling, task: task, label: label)
+    end
   end
   factory :eleventh_task, class: Task do
     task_name {'タスク2'}
@@ -86,6 +126,10 @@ FactoryBot.define do
     status {'未着手'}
     priority {'中'}
     association :user
+    after(:build) do |task|
+      label = create(:label)
+      task.labellings << build(:labelling, task: task, label: label)
+    end
   end
   factory :twelveth_task, class: Task do
     task_name {'タスク3'}
@@ -94,6 +138,10 @@ FactoryBot.define do
     status {'未着手'}
     priority {'低'}
     association :user
+    after(:build) do |task|
+      label = create(:label)
+      task.labellings << build(:labelling, task: task, label: label)
+    end
   end
   factory :thirteenth_task, class: Task do
     task_name {'タスク3'}
@@ -102,5 +150,9 @@ FactoryBot.define do
     status {'未着手'}
     priority {'低'}
     association :user
+    after(:build) do |task|
+      label = create(:label)
+      task.labellings << build(:labelling, task: task, label: label)
+    end
   end
 end
