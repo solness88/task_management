@@ -47,11 +47,11 @@
           <div class="col-md-6 offset-md-1 showpage_content">
             <%= @task.priority %>
           </div>
+
           <% @labels.each do |label| %>
-            <%= form.hidden_field :label_ids %>
+            <%= form.check_box :label_ids, { readonly: true }, label[:id] %>
             <%= label.name %>
           <% end %>
-
         </div>
         <%= form.submit t('attributes.task.submit') %>
         <%= form.submit t('attributes.task.back'), name: "back" %>
