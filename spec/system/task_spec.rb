@@ -58,7 +58,7 @@ RSpec.describe 'タスク管理機能', type: :system do
     context 'タスクが終了期限の降順に並んでいる場合' do
       it '終了期限の最も近いタスクが一番上に表示される' do
         click_on '終了期限でソートする'
-        sleep 0.5
+        sleep 1
         task_list = all('.task_row')
         expect(task_list[0]).to have_content @task_a.task_name
         expect(task_list[1]).to have_content @task_b.task_name
@@ -250,6 +250,27 @@ RSpec.describe 'タスク管理機能', type: :system do
         end
         expect(page).not_to have_content @test_user.name
         expect(page).not_to have_content @test_user.email
+      end
+    end
+  end
+
+  describe 'ラベル機能' do
+    before do
+      FactoryBot.create(:label)
+    end
+    context 'タスク作成画面でラベルを選択すると' do
+      it '詳細画面に選択したラベルが表示される' do
+        visit new_task_path
+        fill_in 'task_task_name', with: '東京'
+        fill_in 'task_detail', with: 'ニューヨーク'
+        fill_in 'task_deadline', with:'002020-01-01'
+        select "完了", from: 'task_status'
+        select "高", from: 'task_priority'
+        check "label1"
+        click_on '登録する'
+        click_on '登録する'
+        click_on '詳細'
+        expect(page).to have_content "label1"
       end
     end
   end
