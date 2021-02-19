@@ -49,8 +49,8 @@
           </div>
             <%= form.hidden_field :label_ids, { multiple: true } %>
             <% @labels.each do |label| %>
-            <%= label.name %>
-          <% end %>
+              <%= label.name %>
+            <% end %>
         </div>
         <%= form.submit t('attributes.task.submit') %>
         <%= form.submit t('attributes.task.back'), name: "back" %>
