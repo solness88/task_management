@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :basic_authenticate
+  #before_action :basic_authenticate
   before_action :authenticate_user, only: [:index]
 
   protect_from_forgery with: :exception

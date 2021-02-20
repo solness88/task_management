@@ -266,8 +266,8 @@ RSpec.describe 'タスク管理機能', type: :system do
         fill_in 'task_deadline', with:'002020-01-01'
         select "完了", from: 'task_status'
         select "高", from: 'task_priority'
-        check("task[label_ids][]")
-        #check "label1"
+        #check("task[label_ids][]")
+        check "label1"
         click_on '登録する'
         click_on '登録する'
         click_on '詳細', match: :first
