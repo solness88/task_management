@@ -20,6 +20,6 @@ end
               user_id: n)
 end
 
-5.times do |n|
+10.times do |n|
   Label.create(name: "#{n}番目のラベル")
 end
