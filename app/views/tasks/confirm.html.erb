@@ -47,8 +47,8 @@
           <div class="col-md-6 offset-md-1 showpage_content">
             <%= @task.priority %>
           </div>
-            <%= form.hidden_field :label_ids, { multiple: true } %>
             <% @labels.each do |label| %>
+              <%= form.hidden_field :label_ids, multiple: true, value: label.id %>
               <%= label.name %>
             <% end %>
         </div>

@@ -33,6 +33,11 @@
     <td class="col-md-2 index_items"><%= task.deadline %></td>
     <td class="col-md-1 index_items"><%= task.status %></td>
     <td class="col-md-1 index_items"><%= task.priority %></td>
+    <td class="col-md-1 index_items">
+      <% task.labels.each do |label| %>
+        <%= label.name %>
+      <% end %>
+    </td>
     <td class="col-md-1 index_items "><button type="button" class="btn btn-primary"><%= link_to t('attributes.task.detail_page'), task_path(task.id), class:"index_link"%></button></td>
     <td class="col-md-1 index_items"><button type="button" class="btn btn-success"><%= link_to t('attributes.task.edit_page'), edit_task_path(task.id), class:"index_link" %></td>
     <td class="col-md-1 index_items"><button type="button" class="btn btn-danger"><%= link_to t('attributes.task.delete'), task_path(task.id), method: :delete ,data: { confirm: '本当に削除していいですか？' }, class:"index_link" %></td>
