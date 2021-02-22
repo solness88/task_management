@@ -11,6 +11,8 @@ class TasksController < ApplicationController
       @tasks = Task.where(user_id:current_user.id).order(priority: :asc).page(params[:page]).per(10)
     end
 
+    @tasks = @tasks.joins(:labels).where(labels: { id: params[:label_id] }) if params[:label_id].present?
+
     if params[:task_name].present? && params[:status].present?
       @tasks = Task.where(user_id:current_user.id).task_name(params[:task_name]).status(params[:status]).page(params[:page]).per(10)
     elsif params[:task_name].present?
@@ -18,8 +20,6 @@ class TasksController < ApplicationController
     elsif params[:status].present?
       @tasks = Task.where(user_id:current_user.id).status(params[:status]).page(params[:page]).per(10)
     end
-
-    #@tasks = Task.page(params[:page])
   end
 
   def new
@@ -40,6 +40,7 @@ class TasksController < ApplicationController
   end
 
   def show
+    @labels = @task.labels
   end
 
   def edit
@@ -60,12 +61,13 @@ class TasksController < ApplicationController
 
   def confirm
     @task = current_user.tasks.build(task_params)
+    @labels = @task.labels
     render :new if @task.invalid?
   end
 
   private
   def task_params
-    params.require(:task).permit(:task_name, :detail, :deadline, :status, :priority)
+    params.require(:task).permit(:task_name, :detail, :deadline, :status, :priority, label_ids: [] )
   end
 
   def set_task

@@ -42,9 +42,15 @@
 <%= paginate @tasks %>
 <div class="container index_sort">
   <div class="row">
-    <div class="col-md-4"><%= link_to t('attributes.task.Sort by Deadline'), tasks_path(deadline: "true") %></div>
-    <div class="col-md-4"><%= link_to t('attributes.task.Sort by Create_time'), tasks_path(created_at: "true") %></div>
-    <div class="col-md-4"><%= link_to t('attributes.task.Sort by Priority'), tasks_path(priority: "true") %></div>
+    <div class="col-md-3"><%= link_to t('attributes.task.Sort by Deadline'), tasks_path(deadline: "true") %></div>
+    <div class="col-md-3"><%= link_to t('attributes.task.Sort by Create_time'), tasks_path(created_at: "true") %></div>
+    <div class="col-md-3"><%= link_to t('attributes.task.Sort by Priority'), tasks_path(priority: "true") %></div>
+    <div class="col-md-3">
+      <%= form_with url: tasks_path, method: :get, local: true do |form| %>
+        <%= form.select("label_id", Label.pluck(:name, :id), { include_blank: true }) %>
+        <%= form.submit 'Search', name: nil %>
+      <% end %>
+    </div>
   </div>
 </div>
 

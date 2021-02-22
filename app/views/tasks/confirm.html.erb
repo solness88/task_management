@@ -48,6 +48,14 @@
             <%= @task.priority %>
           </div>
         </div>
+        <div class="row showpage_item">
+          <% @labels.each do |label| %>
+            <span class="badge bg-secondary">
+            <%= form.hidden_field :label_ids, multiple: true, value: label.id %>
+              <%= label.name %>
+            </span>
+          <% end %>
+        </div>
         <%= form.submit t('attributes.task.submit') %>
         <%= form.submit t('attributes.task.back'), name: "back" %>
       <% end %>

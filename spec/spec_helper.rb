@@ -23,4 +23,8 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 
+  config.before(:all) do
+    FactoryBot.reload
+  end
+
 end

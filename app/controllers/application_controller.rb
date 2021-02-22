@@ -1,16 +1,25 @@
 class ApplicationController < ActionController::Base
-  before_action :basic_authenticate
+  #before_action :basic_authenticate
   before_action :authenticate_user, only: [:index]
 
   protect_from_forgery with: :exception
   include SessionsHelper
 
   private
+
   def basic_authenticate
-    authenticate_or_request_with_http_basic do |username, password|
-      username == 'manyo_test' && password == 'manyo_password'
+    if Rails.env == "production"  #本番環境のみ適応させる
+      authenticate_or_request_with_http_basic do |username, password|
+        username == ENV['USERNAME'] && password == ENV['PASSWORD']
+      end
     end
   end
+
+  #def basic_authenticate
+    #authenticate_or_request_with_http_basic do |username, password|
+      #username == 'manyo_test' && password == 'manyo_password'
+    #end
+  #end
 
   def authenticate_user
     unless logged_in?

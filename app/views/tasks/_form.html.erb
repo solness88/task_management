@@ -46,10 +46,17 @@
             <%= form.select :priority, Task.priorities.keys.to_a, include_blank: "選択して下さい" %>
           </div>
         </div>
+
+        <% Label.all.each do |label| %>
+          <%= form.check_box :label_ids, { multiple: true, checked: label[:checked], disabled: label[:disabled], include_hidden: false }, label[:id] %>
+          <%= form.label :label_ids, label.name, value: label[:id] %>
+        <% end %>
+
       </form>
         <div class="form-group task_new">
           <div class="col-md-12">
-            <%= form.submit %><% end %>
+            <%= form.submit %>
+            <% end %>
           </div>
         </div>
     </div>

@@ -32,7 +32,12 @@
             <%= @task.priority %>
           </div>
         </div>
-    </div>
+        <% @labels.each do |label| %>
+        <span class="badge bg-secondary">
+          <%= label.name %>
+        </span>
+        <% end %>
+      </div>
   </div>
   <%= link_to t('attributes.task.backto_index'), tasks_path %>
 </div>
